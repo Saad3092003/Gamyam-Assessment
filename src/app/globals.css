@@ -1,0 +1,12 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background-color: #fdfdfd !important;
+}
+.border-lighter {
+  border-color: rgba(178, 178, 178, 0.284) !important;
+}
+
+.w-fit {
+  width: fit-content !important;
+}
