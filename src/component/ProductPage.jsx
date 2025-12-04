@@ -23,6 +23,7 @@ export default function ProductPage({ productData, categories }) {
   const [view, setView] = useState("list");
   const [page, setPage] = useState("list");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isNewProductAdded, setIsNewProductAdded] = useState(false);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -51,7 +52,9 @@ export default function ProductPage({ productData, categories }) {
 
                   debounceRef.current = setTimeout(() => {
                     const filtered = products.filter(
-                      (product) => product.name.toLowerCase().includes(value)
+                      (product) =>
+                        product.name.toLowerCase().includes(value) ||
+                        product.category.toLowerCase().includes(value)
                       // I have commented out these below lines that can be used to search in category and tags as well
                       // product.category.toLowerCase().includes(value) ||
                       // product.tags.some((tag) =>
@@ -93,6 +96,7 @@ export default function ProductPage({ productData, categories }) {
           </div>
           {view === "list" ? (
             <TableView
+              isNewProductAdded={isNewProductAdded}
               showModal={showModal}
               data={visibleProducts}
               setSelectedProduct={setSelectedProduct}
@@ -112,6 +116,7 @@ export default function ProductPage({ productData, categories }) {
       ) : page === "add" ? (
         <AddProduct
           setPage={setPage}
+          setIsNewProductAdded={setIsNewProductAdded}
           setProducts={setProducts}
           categories={categories}
           products={products}

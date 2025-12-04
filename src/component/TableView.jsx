@@ -2,7 +2,12 @@ import { DateFormate } from "@/utils/helper";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Table } from "antd";
 
-const TableView = ({ data, setSelectedProduct, showModal }) => {
+const TableView = ({
+  data,
+  setSelectedProduct,
+  showModal,
+  isNewProductAdded,
+}) => {
   const columns = [
     {
       title: "Name",
@@ -43,8 +48,8 @@ const TableView = ({ data, setSelectedProduct, showModal }) => {
     {
       title: "Created At",
       dataIndex: "createdAt",
-      sorter: (a, b) =>
-        new Date(a?.createdAt ?? 0) - new Date(b?.createdAt ?? 0),
+      // sorter: (a, b) =>
+      //   new Date(a?.createdAt ?? 0) - new Date(b?.createdAt ?? 0),
       render: (ts) => {
         return DateFormate(ts);
       },
@@ -71,13 +76,17 @@ const TableView = ({ data, setSelectedProduct, showModal }) => {
       ),
     },
   ];
+
   return (
     <Table
       columns={columns}
       dataSource={data}
       rowKey="id"
       bordered
-      pagination={{ pageSize: 10 }}
+      pagination={{
+        pageSize: 10,
+        defaultCurrent: isNewProductAdded === true ? data?.length : 1,
+      }}
       showSorterTooltip={{ target: "sorter-icon" }}
     />
   );

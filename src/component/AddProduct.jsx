@@ -9,6 +9,7 @@ const AddProduct = ({
   products,
   setVisibleProducts,
   setProducts,
+  setIsNewProductAdded,
 }) => {
   const [errors, setErrors] = useState([
     {
@@ -62,8 +63,9 @@ const AddProduct = ({
         isActive: true,
         tags: data.tags ? data.tags.split(",").map((tag) => tag.trim()) : [],
       };
-      setVisibleProducts([newProduct, ...products]);
-      setProducts([newProduct, ...products]);
+      setVisibleProducts([...products, newProduct]);
+      setProducts([...products, newProduct]);
+      setIsNewProductAdded(true);
       alert("Product added successfully!");
       setPage("list");
     } catch (err) {
